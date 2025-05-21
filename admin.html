@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Administração</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <header class="admin-header">
+            <h1>Painel de Administração</h1>
+            <nav>
+                <a href="index.html">Voltar para o Site</a>
+            </nav>
+        </header>
+
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="filmes">Filmes</button>
+                <button class="tab-btn" data-tab="sessoes">Sessões/Salas</button>
+                <button class="tab-btn" data-tab="ingressos">Ingressos</button>
+            </div>
+
+            <div class="tab-content active" id="filmes-tab">
+                <section class="admin-section">
+                    <h2>Gerenciar Filmes</h2>
+                    <div class="form-container">
+                        <form id="filmeForm">
+                            <div class="form-group">
+                                <label for="filmeNome">Nome do Filme:</label>
+                                <input type="text" id="filmeNome" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="filmeImagem">URL da Imagem:</label>
+                                <input type="url" id="filmeImagem" required>
+                            </div>
+                            <button type="submit" class="btn">Adicionar Filme</button>
+                        </form>
+                    </div>
+                    <div class="lista-container">
+                        <h3>Filmes Cadastrados</h3>
+                        <ul id="listaFilmes" class="lista-itens"></ul>
+                    </div>
+                </section>
+            </div>
+
+            <div class="tab-content" id="sessoes-tab">
+                <section class="admin-section">
+                    <h2>Gerenciar Sessões</h2>
+                    <div class="form-container">
+                        <form id="sessaoForm">
+                            <div class="form-group">
+                                <label for="sessaoFilme">Filme:</label>
+                                <select id="sessaoFilme" required></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="sessaoSala">Sala:</label>
+                                <input type="text" id="sessaoSala" placeholder="Ex: A1, B2" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="sessaoHorario">Horário:</label>
+                                <input type="time" id="sessaoHorario" required>
+                            </div>
+                            <button type="submit" class="btn">Adicionar Sessão</button>
+                        </form>
+                    </div>
+                    <div class="lista-container">
+                        <h3>Sessões Cadastradas</h3>
+                        <ul id="listaSessoes" class="lista-itens"></ul>
+                    </div>
+                </section>
+            </div>
+
+            <div class="tab-content" id="ingressos-tab">
+                <section class="admin-section">
+                    <h2>Gerenciar Preços</h2>
+                    <div class="form-container">
+                        <form id="ingressoForm">
+                            <div class="form-group">
+                                <label for="ingressoSessao">Sessão:</label>
+                                <select id="ingressoSessao" required></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="ingressoTipo">Tipo:</label>
+                                <select id="ingressoTipo" required>
+                                    <option value="inteira">Inteira</option>
+                                    <option value="meia">Meia</option>
+                                    <option value="vip">VIP</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="ingressoValor">Valor (R$):</label>
+                                <input type="number" id="ingressoValor" min="0" step="0.01" required>
+                            </div>
+                            <button type="submit" class="btn">Definir Preço</button>
+                        </form>
+                    </div>
+                    <div class="lista-container">
+                        <h3>Preços Definidos</h3>
+                        <ul id="listaIngressos" class="lista-itens"></ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

@@ -7,6 +7,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Menu de administrador -->
+    <div class="admin-menu">
+        <button class="menu-btn" id="menuBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="menu-options" id="menuOptions">
+            <a href="admin.html">Acessar Administração</a>
+        </div>
+    </div>
+
     <header>
         <h1>FILMES EM CARTAZ</h1>
         <p>Confira as sessões disponíveis e escolha seu ingresso</p>
@@ -177,5 +189,23 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Script para mostrar/esconder o menu de administrador
+        document.getElementById('menuBtn').addEventListener('click', function() {
+            const menuOptions = document.getElementById('menuOptions');
+            menuOptions.classList.toggle('show-menu');
+        });
+        
+        // Fechar o menu quando clicar fora dele
+        document.addEventListener('click', function(event) {
+            const menuBtn = document.getElementById('menuBtn');
+            const menuOptions = document.getElementById('menuOptions');
+            
+            if (!menuBtn.contains(event.target) && !menuOptions.contains(event.target)) {
+                menuOptions.classList.remove('show-menu');
+            }
+        });
+    </script>
 </body>
 </html>

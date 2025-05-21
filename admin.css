@@ -1,0 +1,175 @@
+/* ===== ADMIN STYLES ===== */
+.admin-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    color: var(--text-light);
+    background-color: #363636; /* Fundo cinza escuro */
+    min-height: 100vh;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #696969; /* Header cinza médio */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.admin-header h1 {
+    font-size: 2rem;
+    color: var(--highlight);
+}
+
+.admin-header nav a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.admin-header nav a:hover {
+    color: var(--accent);
+}
+
+.admin-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.admin-section {
+    background-color: #696969; /* Cinza médio para as seções */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+.admin-section h2 {
+    margin-bottom: 20px;
+    color: var(--highlight);
+    font-size: 1.5rem;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--primary);
+}
+
+/* ... (o restante do CSS permanece igual) ... */
+
+.lista-itens li {
+    background-color: #5a5a5a; /* Tom mais escuro para os itens da lista */
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ... (o restante do CSS permanece igual) ... */
+
+@media (max-width: 768px) {
+    .admin-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .admin-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+}
+/* ===== ESTILOS DAS ABAS ===== */
+.tabs-container {
+    background-color: #363636;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.tabs {
+    display: flex;
+    background-color: #696969;
+    border-bottom: 2px solid #0099ff;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 15px 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.tab-btn:not(:last-child) {
+    border-right: 1px solid #8a8a8a;
+}
+
+.tab-btn:hover {
+    background-color: #5a5a5a;
+}
+
+.tab-btn.active {
+    background-color: #0099ff;
+    color: #222;
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #0099ff;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+    animation: fadeIn 0.5s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Ajustes para as seções dentro das abas */
+.tab-content .admin-section {
+    background-color: #696969;
+    margin: 0;
+    box-shadow: none;
+}
+
+.tab-content .lista-container {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .tabs {
+        flex-direction: column;
+    }
+    
+    .tab-btn {
+        padding: 12px;
+    }
+    
+    .tab-btn:not(:last-child) {
+        border-right: none;
+        border-bottom: 1px solid #8a8a8a;
+    }
+}

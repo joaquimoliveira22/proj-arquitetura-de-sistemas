@@ -1,42 +1,147 @@
+/* ===== VARIÁVEIS DE CORES ===== */
+:root {
+    --dark-bg: #1a1a1a;
+    --medium-bg: #2d2d2d;
+    --light-bg: #3d3d3d;
+    --highlight: #ffffff;
+    --primary: #0099ff;
+    --secondary: #22e622;
+    --accent: #ff8800;
+    --text-light: #f0f0f0;
+    --text-dark: #222222;
+    --success: #2ecc71;
+    --warning: #ff6b6b;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== RESET E ESTILOS GERAIS ===== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-color: #363636;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    line-height: 1.6;
     padding: 20px;
-    color: white;
 }
 
+/* ===== HEADER ===== */
 header {
     text-align: center;
     margin-bottom: 30px;
-    padding: 20px;
-    background-color: #696969;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    color: white;
+    padding: 25px;
+    background-color: var(--medium-bg);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
 }
 
 h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 header p {
     font-size: 1.1rem;
+    opacity: 0.9;
 }
 
+/* ===== MENU ADMIN ===== */
+.admin-menu {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    z-index: 1000;
+}
+
+.menu-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 32px;
+    height: 24px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    transition: transform 0.3s ease;
+}
+
+.menu-btn:hover {
+    transform: scale(1.1);
+}
+
+.menu-btn span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--highlight);
+    transition: all 0.3s ease;
+    border-radius: 3px;
+}
+
+.menu-options {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    background-color: var(--medium-bg);
+    border-radius: 8px;
+    padding: 10px 0;
+    box-shadow: var(--shadow);
+    min-width: 200px;
+    overflow: hidden;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.menu-options a {
+    color: var(--text-light);
+    text-decoration: none;
+    display: block;
+    padding: 12px 20px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.menu-options a:hover {
+    background-color: var(--light-bg);
+    padding-left: 25px;
+}
+
+.show-menu {
+    display: block;
+}
+
+/* ===== CONTAINER DE FILMES ===== */
 .filmes-container {
     display: flex;
     overflow-x: auto;
-    gap: 20px;
-    padding: 20px 0;
+    gap: 25px;
+    padding: 20px 10px;
     scrollbar-width: thin;
-    scrollbar-color: #ffffff #696969;
+    scrollbar-color: var(--highlight) var(--medium-bg);
 }
 
 .filmes-container::-webkit-scrollbar {
@@ -44,123 +149,235 @@ header p {
 }
 
 .filmes-container::-webkit-scrollbar-track {
-    background: #696969;
+    background: var(--medium-bg);
     border-radius: 10px;
 }
 
 .filmes-container::-webkit-scrollbar-thumb {
-    background-color: white;
+    background-color: var(--highlight);
     border-radius: 10px;
 }
 
+/* ===== CARDS DE FILME ===== */
 .filme-card {
-    background-color: #696969;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background-color: var(--medium-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
     overflow: hidden;
     width: 280px;
     min-width: 280px;
-    transition: transform 0.3s ease;
-    color: white;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
 }
 
 .filme-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.filme-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.filme-card:hover::after {
+    opacity: 1;
 }
 
 .filme-poster {
     width: 100%;
     height: 380px;
     object-fit: cover;
-    border-bottom: 3px solid white;
+    border-bottom: 3px solid var(--light-bg);
+    transition: transform 0.5s ease;
+}
+
+.filme-card:hover .filme-poster {
+    transform: scale(1.05);
 }
 
 .filme-info {
-    padding: 15px;
+    padding: 20px;
 }
 
 .filme-titulo {
     font-size: 1.3rem;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     min-height: 60px;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
 }
 
+.filme-titulo::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: var(--primary);
+    border-radius: 3px;
+}
+
+/* ===== SESSÕES ===== */
 .filme-sessao {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 12px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #8a8a8a;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--light-bg);
 }
 
 .sessao-hora, .sessao-sala {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .sessao-hora {
-    color: #ffffff;
+    color: var(--highlight);
 }
 
 .sessao-sala {
-    color: #ffffff;
+    color: var(--primary);
 }
 
+/* ===== INGRESSOS ===== */
 .ingressos-titulo {
-    font-size: 1rem;
-    margin-bottom: 10px;
+    font-size: 1.1rem;
+    margin: 20px 0 15px;
+    font-weight: 600;
+    position: relative;
+}
+
+.ingressos-titulo::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background-color: var(--secondary);
 }
 
 .ingressos-lista {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
 .ingresso-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 10px;
-    border-radius: 5px;
-    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: transform 0.2s ease;
+}
+
+.ingresso-item:hover {
+    transform: translateX(5px);
 }
 
 .ingresso-tipo {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
 }
 
 .ingresso-valor {
-    font-size: 1rem;
+    font-size: 1.05rem;
 }
 
 .inteira {
-    background-color: #0099ff;
-    color: white;
+    background-color: var(--primary);
+    color: var(--text-dark);
 }
 
 .meia {
-    background-color: #22e622;
-    color: white;
+    background-color: var(--secondary);
+    color: var(--text-dark);
 }
 
 .vip {
-    background-color: #ff8800;
-    color: white;
+    background-color: var(--accent);
+    color: var(--text-dark);
 }
 
+/* ===== DISPONIBILIDADE ===== */
 .disponibilidade {
-    font-size: 0.9rem;
-    margin-top: 12px;
-    font-style: italic;
+    font-size: 0.95rem;
+    margin-top: 20px;
+    font-weight: 500;
     text-align: center;
+    padding: 10px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.disponibilidade:hover {
+    transform: scale(1.02);
 }
 
 .urgente {
-    color: #ff6b6b;
-    font-weight: bold;
+    color: var(--warning);
+    background-color: rgba(255, 107, 107, 0.1);
+    animation: pulse 1.5s infinite;
 }
 
 .boa {
-    color: #2ecc71;
+    color: var(--success);
+    background-color: rgba(46, 204, 113, 0.1);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+    .filmes-container {
+        gap: 15px;
+        padding: 15px 5px;
+    }
+    
+    .filme-card {
+        width: 260px;
+        min-width: 260px;
+    }
+    
+    .admin-menu {
+        top: 20px;
+        right: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 15px;
+    }
+    
+    header {
+        padding: 20px 15px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .filme-card {
+        width: 240px;
+        min-width: 240px;
+    }
+    
+    .filme-poster {
+        height: 340px;
+    }
 }
