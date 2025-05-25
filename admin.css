@@ -173,3 +173,24 @@
         border-bottom: 1px solid #8a8a8a;
     }
 }
+/* Adicione ao seu admin.css */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-btn {
+    cursor: pointer;
+    padding: 10px 15px;
+    background: #686363;
+    border: none;
+    margin-right: 5px;
+}
+
+.tab-btn.active {
+    background: #4CAF50;
+    color: white;
+}

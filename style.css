@@ -58,11 +58,6 @@ h1 {
     letter-spacing: 1px;
 }
 
-header p {
-    font-size: 1.1rem;
-    opacity: 0.9;
-}
-
 /* ===== MENU ADMIN ===== */
 .admin-menu {
     position: fixed;
@@ -108,6 +103,10 @@ header p {
     box-shadow: var(--shadow);
     min-width: 200px;
     overflow: hidden;
+}
+
+.menu-options.active {
+    display: block;
     animation: fadeIn 0.3s ease-out;
 }
 
@@ -130,32 +129,12 @@ header p {
     padding-left: 25px;
 }
 
-.show-menu {
-    display: block;
-}
-
 /* ===== CONTAINER DE FILMES ===== */
 .filmes-container {
-    display: flex;
-    overflow-x: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 25px;
-    padding: 20px 10px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--highlight) var(--medium-bg);
-}
-
-.filmes-container::-webkit-scrollbar {
-    height: 8px;
-}
-
-.filmes-container::-webkit-scrollbar-track {
-    background: var(--medium-bg);
-    border-radius: 10px;
-}
-
-.filmes-container::-webkit-scrollbar-thumb {
-    background-color: var(--highlight);
-    border-radius: 10px;
+    padding: 20px;
 }
 
 /* ===== CARDS DE FILME ===== */
@@ -164,43 +143,17 @@ header p {
     border-radius: 12px;
     box-shadow: var(--shadow);
     overflow: hidden;
-    width: 280px;
-    min-width: 280px;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    position: relative;
+    transition: transform 0.3s ease;
 }
 
 .filme-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-}
-
-.filme-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.filme-card:hover::after {
-    opacity: 1;
+    transform: translateY(-5px);
 }
 
 .filme-poster {
     width: 100%;
-    height: 380px;
+    height: 400px;
     object-fit: cover;
-    border-bottom: 3px solid var(--light-bg);
-    transition: transform 0.5s ease;
-}
-
-.filme-card:hover .filme-poster {
-    transform: scale(1.05);
 }
 
 .filme-info {
@@ -210,24 +163,10 @@ header p {
 .filme-titulo {
     font-size: 1.3rem;
     margin-bottom: 15px;
-    min-height: 60px;
     font-weight: 600;
-    position: relative;
-    padding-bottom: 10px;
 }
 
-.filme-titulo::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 50px;
-    height: 3px;
-    background-color: var(--primary);
-    border-radius: 3px;
-}
-
-/* ===== SESSÕES ===== */
+/* ===== SESSÕES E INGRESSOS ===== */
 .filme-sessao {
     display: flex;
     justify-content: space-between;
@@ -236,40 +175,11 @@ header p {
     border-bottom: 1px solid var(--light-bg);
 }
 
-.sessao-hora, .sessao-sala {
-    font-weight: 600;
-}
-
-.sessao-hora {
-    color: var(--highlight);
-}
-
-.sessao-sala {
-    color: var(--primary);
-}
-
-/* ===== INGRESSOS ===== */
-.ingressos-titulo {
-    font-size: 1.1rem;
-    margin: 20px 0 15px;
-    font-weight: 600;
-    position: relative;
-}
-
-.ingressos-titulo::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 30px;
-    height: 2px;
-    background-color: var(--secondary);
-}
-
 .ingressos-lista {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-top: 15px;
 }
 
 .ingresso-item {
@@ -279,19 +189,6 @@ header p {
     padding: 10px 15px;
     border-radius: 8px;
     font-weight: 600;
-    transition: transform 0.2s ease;
-}
-
-.ingresso-item:hover {
-    transform: translateX(5px);
-}
-
-.ingresso-tipo {
-    font-size: 0.95rem;
-}
-
-.ingresso-valor {
-    font-size: 1.05rem;
 }
 
 .inteira {
@@ -309,53 +206,33 @@ header p {
     color: var(--text-dark);
 }
 
-/* ===== DISPONIBILIDADE ===== */
-.disponibilidade {
-    font-size: 0.95rem;
-    margin-top: 20px;
-    font-weight: 500;
+/* ===== BOTÃO REMOVER ===== */
+.btn-remover {
+    background-color: var(--warning);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+/* ===== MENSAGENS ===== */
+.sem-filmes {
+    grid-column: 1 / -1;
     text-align: center;
-    padding: 10px;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-}
-
-.disponibilidade:hover {
-    transform: scale(1.02);
-}
-
-.urgente {
-    color: var(--warning);
-    background-color: rgba(255, 107, 107, 0.1);
-    animation: pulse 1.5s infinite;
-}
-
-.boa {
-    color: var(--success);
-    background-color: rgba(46, 204, 113, 0.1);
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.02); }
-    100% { transform: scale(1); }
+    padding: 40px;
+    color: var(--text-light);
 }
 
 /* ===== RESPONSIVIDADE ===== */
 @media (max-width: 768px) {
     .filmes-container {
-        gap: 15px;
-        padding: 15px 5px;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
     
-    .filme-card {
-        width: 260px;
-        min-width: 260px;
-    }
-    
-    .admin-menu {
-        top: 20px;
-        right: 20px;
+    .filme-poster {
+        height: 350px;
     }
 }
 
@@ -364,20 +241,179 @@ header p {
         padding: 15px;
     }
     
-    header {
-        padding: 20px 15px;
-    }
-    
-    h1 {
-        font-size: 2rem;
-    }
-    
     .filme-card {
-        width: 240px;
-        min-width: 240px;
+        min-width: 100%;
     }
-    
-    .filme-poster {
-        height: 340px;
-    }
+}
+/* Botão de remover filme */
+.btn-remover-filme {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: var(--warning);
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.filme-card:hover .btn-remover-filme {
+    opacity: 1;
+}
+
+.btn-remover-filme:hover {
+    background-color: #e53935;
+    transform: scale(1.1);
+}
+
+/* Modal de confirmação */
+.modal-remover {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-conteudo {
+    background-color: var(--medium-bg);
+    padding: 25px;
+    border-radius: 10px;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.modal-botoes {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.modal-btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.modal-btn.confirmar {
+    background-color: var(--warning);
+    color: white;
+}
+
+.modal-btn.cancelar {
+    background-color: var(--light-bg);
+    color: var(--text-light);
+}
+/* Botão de remover filme */
+.btn-remover-filme {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.filme-card {
+    position: relative;
+    /* Mantenha seus outros estilos de filme-card */
+}
+
+.filme-card:hover .btn-remover-filme {
+    opacity: 1;
+}
+
+.btn-remover-filme:hover {
+    background-color: #ff4757;
+    transform: scale(1.1);
+}
+/* Menu de Administração */
+.admin-menu {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.menu-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.menu-btn span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+.menu-options {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 35px;
+    background-color: #2d2d2d;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    min-width: 180px;
+    overflow: hidden;
+}
+
+.menu-options a {
+    display: block;
+    padding: 12px 20px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.menu-options a:hover {
+    background-color: #3d3d3d;
+}
+
+.menu-options.show {
+    display: block;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }

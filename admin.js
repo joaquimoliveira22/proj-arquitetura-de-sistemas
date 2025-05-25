@@ -1,189 +1,189 @@
+// Controle das abas - Adicione isso no início do arquivo admin.js
+function setupTabs() {
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove classe active de todos
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // Adiciona ao botão clicado
+            button.classList.add('active');
+            
+            // Mostra o conteúdo correspondente
+            const tabId = button.getAttribute('data-tab') + '-tab';
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+}
+
+// Chame esta função no final do DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Dados armazenados
+    setupTabs(); // Adicione esta linha
+    // ... resto do seu código existente
+});
+document.addEventListener('DOMContentLoaded', function() {
+    // Dados iniciais
     let filmes = JSON.parse(localStorage.getItem('filmes')) || [];
     let sessoes = JSON.parse(localStorage.getItem('sessoes')) || [];
     let ingressos = JSON.parse(localStorage.getItem('ingressos')) || [];
 
-    // Elementos do formulário de filmes
+    // Função para gerar IDs únicos
+    function gerarId() {
+        return Date.now().toString(36) + Math.random().toString(36).substr(2);
+    }
+
+    // Função principal de atualização
+    function atualizarFilmesEmCartaz() {
+        const filmesAtualizados = filmes.map(filme => {
+            return {
+                ...filme,
+                sessoes: sessoes.filter(s => s.filmeId === filme.id),
+                ingressos: ingressos.filter(i => {
+                    const sessao = sessoes.find(s => s.id === i.sessaoId);
+                    return sessao && sessao.filmeId === filme.id;
+                })
+            };
+        });
+        
+        localStorage.setItem('filmesEmCartaz', JSON.stringify(filmesAtualizados));
+        return filmesAtualizados;
+    }
+
+    // Formulário de Filmes
     const filmeForm = document.getElementById('filmeForm');
-    const filmeNome = document.getElementById('filmeNome');
-    const filmeImagem = document.getElementById('filmeImagem');
-    const listaFilmes = document.getElementById('listaFilmes');
-
-    // Elementos do formulário de sessões
-    const sessaoForm = document.getElementById('sessaoForm');
-    const sessaoFilme = document.getElementById('sessaoFilme');
-    const sessaoSala = document.getElementById('sessaoSala');
-    const sessaoHorario = document.getElementById('sessaoHorario');
-    const listaSessoes = document.getElementById('listaSessoes');
-
-    // Elementos do formulário de ingressos
-    const ingressoForm = document.getElementById('ingressoForm');
-    const ingressoSessao = document.getElementById('ingressoSessao');
-    const ingressoTipo = document.getElementById('ingressoTipo');
-    const ingressoValor = document.getElementById('ingressoValor');
-    const listaIngressos = document.getElementById('listaIngressos');
-
-    // Atualiza selects com dados existentes
-    function atualizarSelects() {
-        // Atualiza select de filmes
-        sessaoFilme.innerHTML = '';
-        filmes.forEach(filme => {
-            const option = document.createElement('option');
-            option.value = filme.id;
-            option.textContent = filme.nome;
-            sessaoFilme.appendChild(option);
-        });
-
-        // Atualiza select de sessões
-        ingressoSessao.innerHTML = '';
-        sessoes.forEach(sessao => {
-            const filme = filmes.find(f => f.id === sessao.filmeId);
-            const option = document.createElement('option');
-            option.value = sessao.id;
-            option.textContent = `${filme ? filme.nome : 'Filme não encontrado'} - ${sessao.sala} (${sessao.horario})`;
-            ingressoSessao.appendChild(option);
-        });
-    }
-
-    // Renderiza lista de filmes
-    function renderizarFilmes() {
-        listaFilmes.innerHTML = '';
-        filmes.forEach(filme => {
-            const li = document.createElement('li');
-            li.innerHTML = `
-                <span>${filme.nome}</span>
-                <button data-id="${filme.id}" class="btn-remover">Remover</button>
-            `;
-            listaFilmes.appendChild(li);
-        });
-
-        // Adiciona eventos aos botões de remover
-        document.querySelectorAll('.btn-remover').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const id = this.getAttribute('data-id');
-                filmes = filmes.filter(filme => filme.id !== id);
-                localStorage.setItem('filmes', JSON.stringify(filmes));
-                renderizarFilmes();
-                atualizarSelects();
-            });
-        });
-    }
-
-    // Renderiza lista de sessões
-    function renderizarSessoes() {
-        listaSessoes.innerHTML = '';
-        sessoes.forEach(sessao => {
-            const filme = filmes.find(f => f.id === sessao.filmeId);
-            const li = document.createElement('li');
-            li.innerHTML = `
-                <span>${filme ? filme.nome : 'Filme não encontrado'} - ${sessao.sala} (${sessao.horario})</span>
-                <button data-id="${sessao.id}" class="btn-remover">Remover</button>
-            `;
-            listaSessoes.appendChild(li);
-        });
-
-        // Adiciona eventos aos botões de remover
-        document.querySelectorAll('#listaSessoes .btn-remover').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const id = this.getAttribute('data-id');
-                sessoes = sessoes.filter(sessao => sessao.id !== id);
-                localStorage.setItem('sessoes', JSON.stringify(sessoes));
-                renderizarSessoes();
-                atualizarSelects();
-            });
-        });
-    }
-
-    // Renderiza lista de ingressos
-    function renderizarIngressos() {
-        listaIngressos.innerHTML = '';
-        ingressos.forEach(ingresso => {
-            const sessao = sessoes.find(s => s.id === ingresso.sessaoId);
-            const filme = sessao ? filmes.find(f => f.id === sessao.filmeId) : null;
-            
-            const li = document.createElement('li');
-            li.innerHTML = `
-                <span>${filme ? filme.nome : 'Sessão não encontrada'} - ${ingresso.tipo}: R$ ${ingresso.valor.toFixed(2)}</span>
-                <button data-id="${ingresso.id}" class="btn-remover">Remover</button>
-            `;
-            listaIngressos.appendChild(li);
-        });
-
-        // Adiciona eventos aos botões de remover
-        document.querySelectorAll('#listaIngressos .btn-remover').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const id = this.getAttribute('data-id');
-                ingressos = ingressos.filter(ingresso => ingresso.id !== id);
-                localStorage.setItem('ingressos', JSON.stringify(ingressos));
-                renderizarIngressos();
-            });
-        });
-    }
-
-    // Formulário de filmes
     filmeForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
         const novoFilme = {
-            id: Date.now().toString(),
-            nome: filmeNome.value,
-            imagem: filmeImagem.value
+            id: gerarId(),
+            nome: document.getElementById('filmeNome').value,
+            imagem: document.getElementById('filmeImagem').value
         };
         
         filmes.push(novoFilme);
         localStorage.setItem('filmes', JSON.stringify(filmes));
         
-        filmeNome.value = '';
-        filmeImagem.value = '';
-        
-        renderizarFilmes();
-        atualizarSelects();
+        filmeForm.reset();
+        atualizarFilmesEmCartaz();
+        alert('Filme cadastrado com sucesso!');
     });
 
-    // Formulário de sessões
+    // Formulário de Sessões
+    const sessaoForm = document.getElementById('sessaoForm');
     sessaoForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
         const novaSessao = {
-            id: Date.now().toString(),
-            filmeId: sessaoFilme.value,
-            sala: sessaoSala.value.toUpperCase(),
-            horario: sessaoHorario.value
+            id: gerarId(),
+            filmeId: document.getElementById('sessaoFilme').value,
+            sala: document.getElementById('sessaoSala').value.toUpperCase(),
+            horario: document.getElementById('sessaoHorario').value
         };
         
         sessoes.push(novaSessao);
         localStorage.setItem('sessoes', JSON.stringify(sessoes));
         
-        sessaoSala.value = '';
-        sessaoHorario.value = '';
-        
-        renderizarSessoes();
-        atualizarSelects();
+        sessaoForm.reset();
+        atualizarFilmesEmCartaz();
+        alert('Sessão cadastrada com sucesso!');
     });
 
-    // Formulário de ingressos
+    // Formulário de Ingressos
+    const ingressoForm = document.getElementById('ingressoForm');
     ingressoForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
         const novoIngresso = {
-            id: Date.now().toString(),
-            sessaoId: ingressoSessao.value,
-            tipo: ingressoTipo.value,
-            valor: parseFloat(ingressoValor.value)
+            id: gerarId(),
+            sessaoId: document.getElementById('ingressoSessao').value,
+            tipo: document.getElementById('ingressoTipo').value,
+            valor: parseFloat(document.getElementById('ingressoValor').value)
         };
         
         ingressos.push(novoIngresso);
         localStorage.setItem('ingressos', JSON.stringify(ingressos));
         
-        ingressoValor.value = '';
-        
-        renderizarIngressos();
+        ingressoForm.reset();
+        atualizarFilmesEmCartaz();
+        alert('Ingresso cadastrado com sucesso!');
     });
 
+    // Atualiza selects
+    function carregarSelects() {
+        const selectFilmes = document.getElementById('sessaoFilme');
+        const selectSessoes = document.getElementById('ingressoSessao');
+        
+        selectFilmes.innerHTML = filmes.map(f => 
+            `<option value="${f.id}">${f.nome}</option>`
+        ).join('');
+        
+        selectSessoes.innerHTML = sessoes.map(s => {
+            const filme = filmes.find(f => f.id === s.filmeId);
+            return `<option value="${s.id}">${filme?.nome || 'Filme não encontrado'} - ${s.sala} (${s.horario})</option>`;
+        }).join('');
+    }
+
     // Inicialização
-    renderizarFilmes();
-    renderizarSessoes();
-    renderizarIngressos();
-    atualizarSelects();
+    carregarSelects();
+    atualizarFilmesEmCartaz();
+});
+// Adicione esta função no seu admin.js
+function renderizarListaFilmes() {
+    const listaFilmes = document.getElementById('listaFilmes');
+    listaFilmes.innerHTML = '';
+
+    filmes.forEach(filme => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <span>${filme.nome}</span>
+            <button class="btn-remover" data-id="${filme.id}">Remover</button>
+        `;
+        listaFilmes.appendChild(li);
+    });
+
+    // Adiciona eventos aos botões de remoção
+    document.querySelectorAll('.btn-remover').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            removerFilme(id);
+        });
+    });
+}
+
+// Função para remover filme e seus relacionamentos
+function removerFilme(id) {
+    if (confirm('Tem certeza que deseja remover este filme? Todas as sessões e ingressos relacionados também serão removidos.')) {
+        // Remove o filme
+        filmes = filmes.filter(filme => filme.id !== id);
+        
+        // Remove sessões relacionadas
+        const sessoesParaRemover = sessoes.filter(s => s.filmeId === id);
+        sessoes = sessoes.filter(s => s.filmeId !== id);
+        
+        // Remove ingressos das sessões removidas
+        const idsSessoes = sessoesParaRemover.map(s => s.id);
+        ingressos = ingressos.filter(i => !idsSessoes.includes(i.sessaoId));
+        
+        // Atualiza localStorage
+        localStorage.setItem('filmes', JSON.stringify(filmes));
+        localStorage.setItem('sessoes', JSON.stringify(sessoes));
+        localStorage.setItem('ingressos', JSON.stringify(ingressos));
+        
+        // Atualiza a interface
+        renderizarListaFilmes();
+        atualizarSelects();
+        atualizarFilmesEmCartaz();
+        
+        alert('Filme removido com sucesso!');
+    }
+}
+
+// Modifique o evento DOMContentLoaded para incluir:
+document.addEventListener('DOMContentLoaded', function() {
+    // ... (código existente)
+    renderizarListaFilmes();  // Adicione esta linha
+    // ... (código existente)
 });

@@ -7,205 +7,180 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Menu de administrador -->
     <div class="admin-menu">
-        <button class="menu-btn" id="menuBtn">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <div class="menu-options" id="menuOptions">
-            <a href="admin.html">Acessar Administração</a>
-        </div>
+    <button class="menu-btn" id="menuBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <div class="menu-options" id="menuOptions">
+        <a href="admin.html">Acessar Administração</a>
     </div>
+</div>
 
     <header>
         <h1>FILMES EM CARTAZ</h1>
         <p>Confira as sessões disponíveis e escolha seu ingresso</p>
     </header>
 
-    <div class="filmes-container">
-        <!-- Filme 1 -->
-        <div class="filme-card">
-            <img src="images/duna-parte-2.jpg" alt="Duna Parte 2" class="filme-poster">
-            <div class="filme-info">
-                <h2 class="filme-titulo">Duna: Parte 2</h2>
-                <div class="filme-sessao">
-                    <span class="sessao-hora">16:30</span>
-                    <span class="sessao-sala">Sala 5</span>
-                </div>
-                <h3 class="ingressos-titulo">Ingressos disponíveis:</h3>
-                <div class="ingressos-lista">
-                    <div class="ingresso-item inteira">
-                        <span class="ingresso-tipo">Inteira</span>
-                        <span class="ingresso-valor">R$ 32,00</span>
-                    </div>
-                    <div class="ingresso-item meia">
-                        <span class="ingresso-tipo">Meia</span>
-                        <span class="ingresso-valor">R$ 16,00</span>
-                    </div>
-                    <div class="ingresso-item vip">
-                        <span class="ingresso-tipo">VIP</span>
-                        <span class="ingresso-valor">R$ 48,00</span>
-                    </div>
-                </div>
-                <div class="disponibilidade urgente">Últimos ingressos!</div>
-            </div>
-        </div>
-
-        <!-- Filme 2 -->
-        <div class="filme-card">
-            <img src="images/o-menino-e-a-garça.jpg" alt="O Menino e a Garça" class="filme-poster">
-            <div class="filme-info">
-                <h2 class="filme-titulo">O Menino e a Garça</h2>
-                <div class="filme-sessao">
-                    <span class="sessao-hora">14:15</span>
-                    <span class="sessao-sala">Sala 3</span>
-                </div>
-                <div class="filme-sessao">
-                    <span class="sessao-hora">19:45</span>
-                    <span class="sessao-sala">Sala 3</span>
-                </div>
-                <h3 class="ingressos-titulo">Ingressos disponíveis:</h3>
-                <div class="ingressos-lista">
-                    <div class="ingresso-item inteira">
-                        <span class="ingresso-tipo">Inteira</span>
-                        <span class="ingresso-valor">R$ 28,00</span>
-                    </div>
-                    <div class="ingresso-item meia">
-                        <span class="ingresso-tipo">Meia</span>
-                        <span class="ingresso-valor">R$ 14,00</span>
-                    </div>
-                    <div class="ingresso-item vip">
-                        <span class="ingresso-tipo">VIP</span>
-                        <span class="ingresso-valor">R$ 42,00</span>
-                    </div>
-                </div>
-                <div class="disponibilidade boa">Boa disponibilidade</div>
-            </div>
-        </div>
-
-        <!-- Filme 3 -->
-        <div class="filme-card">
-            <img src="images/deadpool 3.jpg" alt="Deadpool 3" class="filme-poster">
-            <div class="filme-info">
-                <h2 class="filme-titulo">Deadpool & Wolverine</h2>
-                <div class="filme-sessao">
-                    <span class="sessao-hora">15:00</span>
-                    <span class="sessao-sala">Sala 1</span>
-                </div>
-                <div class="filme-sessao">
-                    <span class="sessao-hora">17:30</span>
-                    <span class="sessao-sala">Sala 1</span>
-                </div>
-                <div class="filme-sessao">
-                    <span class="sessao-hora">21:00</span>
-                    <span class="sessao-sala">Sala 1</span>
-                </div>
-                <h3 class="ingressos-titulo">Ingressos disponíveis:</h3>
-                <div class="ingressos-lista">
-                    <div class="ingresso-item inteira">
-                        <span class="ingresso-tipo">Inteira</span>
-                        <span class="ingresso-valor">R$ 35,00</span>
-                    </div>
-                    <div class="ingresso-item meia">
-                        <span class="ingresso-tipo">Meia</span>
-                        <span class="ingresso-valor">R$ 17,50</span>
-                    </div>
-                    <div class="ingresso-item vip">
-                        <span class="ingresso-tipo">VIP</span>
-                        <span class="ingresso-valor">R$ 52,50</span>
-                    </div>
-                </div>
-                <div class="disponibilidade">Sessões quase lotadas</div>
-            </div>
-        </div>
-
-        <!-- Filme 4 -->
-        <div class="filme-card">
-            <img src="images/furiosa.jpg" alt="Furiosa" class="filme-poster">
-            <div class="filme-info">
-                <h2 class="filme-titulo">Furiosa: Uma Saga Mad Max</h2>
-                <div class="filme-sessao">
-                    <span class="sessao-hora">13:45</span>
-                    <span class="sessao-sala">Sala 4</span>
-                </div>
-                <div class="filme-sessao">
-                    <span class="sessao-hora">18:15</span>
-                    <span class="sessao-sala">Sala 4</span>
-                </div>
-                <h3 class="ingressos-titulo">Ingressos disponíveis:</h3>
-                <div class="ingressos-lista">
-                    <div class="ingresso-item inteira">
-                        <span class="ingresso-tipo">Inteira</span>
-                        <span class="ingresso-valor">R$ 30,00</span>
-                    </div>
-                    <div class="ingresso-item meia">
-                        <span class="ingresso-tipo">Meia</span>
-                        <span class="ingresso-valor">R$ 15,00</span>
-                    </div>
-                    <div class="ingresso-item vip">
-                        <span class="ingresso-tipo">VIP</span>
-                        <span class="ingresso-valor">R$ 45,00</span>
-                    </div>
-                </div>
-                <div class="disponibilidade boa">Ampla disponibilidade</div>
-            </div>
-        </div>
-
-        <!-- Filme 5 -->
-        <div class="filme-card">
-            <img src="images/godzilla-e-kong.jpg" alt="Godzilla e Kong" class="filme-poster">
-            <div class="filme-info">
-                <h2 class="filme-titulo">Godzilla e Kong: O Novo Império</h2>
-                <div class="filme-sessao">
-                    <span class="sessao-hora">14:00</span>
-                    <span class="sessao-sala">Sala 2</span>
-                </div>
-                <div class="filme-sessao">
-                    <span class="sessao-hora">16:30</span>
-                    <span class="sessao-sala">Sala 2</span>
-                </div>
-                <div class="filme-sessao">
-                    <span class="sessao-hora">20:00</span>
-                    <span class="sessao-sala">Sala 2</span>
-                </div>
-                <h3 class="ingressos-titulo">Ingressos disponíveis:</h3>
-                <div class="ingressos-lista">
-                    <div class="ingresso-item inteira">
-                        <span class="ingresso-tipo">Inteira</span>
-                        <span class="ingresso-valor">R$ 34,00</span>
-                    </div>
-                    <div class="ingresso-item meia">
-                        <span class="ingresso-tipo">Meia</span>
-                        <span class="ingresso-valor">R$ 17,00</span>
-                    </div>
-                    <div class="ingresso-item vip">
-                        <span class="ingresso-tipo">VIP</span>
-                        <span class="ingresso-valor">R$ 51,00</span>
-                    </div>
-                </div>
-                <div class="disponibilidade">Disponibilidade média</div>
-            </div>
-        </div>
+    <div class="filmes-container" id="filmesContainer">
+        <!-- Filmes serão carregados aqui via JavaScript -->
     </div>
-
+   
     <script>
-        // Script para mostrar/esconder o menu de administrador
-        document.getElementById('menuBtn').addEventListener('click', function() {
-            const menuOptions = document.getElementById('menuOptions');
-            menuOptions.classList.toggle('show-menu');
-        });
+        document.addEventListener('DOMContentLoaded', function() {
+    // Função principal para carregar filmes
+    function carregarFilmes() {
+        const container = document.getElementById('filmesContainer');
+        const filmesData = JSON.parse(localStorage.getItem('filmesEmCartaz')) || [];
         
-        // Fechar o menu quando clicar fora dele
-        document.addEventListener('click', function(event) {
-            const menuBtn = document.getElementById('menuBtn');
-            const menuOptions = document.getElementById('menuOptions');
-            
-            if (!menuBtn.contains(event.target) && !menuOptions.contains(event.target)) {
-                menuOptions.classList.remove('show-menu');
+        container.innerHTML = '';
+        
+        if (filmesData.length === 0) {
+            container.innerHTML = `
+                <div class="sem-filmes">
+                    <p>Nenhum filme em cartaz no momento.</p>
+                </div>
+            `;
+            return;
+        }
+        
+        filmesData.forEach(filme => {
+            if (filme.sessoes && filme.sessoes.length > 0) {
+                const card = document.createElement('div');
+                card.className = 'filme-card';
+                card.dataset.id = filme.id;
+                
+                card.innerHTML = `
+                    <button class="btn-remover-filme" title="Remover filme">×</button>
+                    <img src="${filme.imagem}" alt="${filme.nome}" class="filme-poster">
+                    <div class="filme-info">
+                        <h2 class="filme-titulo">${filme.nome}</h2>
+                        ${filme.sessoes.map(sessao => `
+                            <div class="filme-sessao">
+                                <span class="sessao-hora">${sessao.horario}</span>
+                                <span class="sessao-sala">Sala ${sessao.sala}</span>
+                            </div>
+                        `).join('')}
+                        <h3 class="ingressos-titulo">Ingressos disponíveis:</h3>
+                        <div class="ingressos-lista">
+                            ${filme.ingressos.map(ingresso => `
+                                <div class="ingresso-item ${ingresso.tipo}">
+                                    <span class="ingresso-tipo">${ingresso.tipo}</span>
+                                    <span class="ingresso-valor">R$ ${ingresso.valor.toFixed(2)}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(card);
             }
         });
+        
+        // Configura os eventos de remoção após criar os cards
+        setupRemocaoFilmes();
+    }
+
+    // Função para configurar os eventos de remoção
+    function setupRemocaoFilmes() {
+        document.querySelectorAll('.btn-remover-filme').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const filmeCard = this.closest('.filme-card');
+                const filmeId = filmeCard.dataset.id;
+                const filmeNome = filmeCard.querySelector('.filme-titulo').textContent;
+                
+                if (confirm(`Tem certeza que deseja remover "${filmeNome}" e todas as suas sessões?`)) {
+                    removerFilme(filmeId);
+                }
+            });
+        });
+    }
+
+    // Função para remover filme do sistema
+    function removerFilme(id) {
+        // Obter dados atuais
+        let filmes = JSON.parse(localStorage.getItem('filmes')) || [];
+        let sessoes = JSON.parse(localStorage.getItem('sessoes')) || [];
+        let ingressos = JSON.parse(localStorage.getItem('ingressos')) || [];
+        
+        // Remover o filme
+        filmes = filmes.filter(filme => filme.id !== id);
+        
+        // Remover sessões relacionadas
+        const sessoesParaRemover = sessoes.filter(sessao => sessao.filmeId === id);
+        sessoes = sessoes.filter(sessao => sessao.filmeId !== id);
+        
+        // Remover ingressos relacionados
+        const idsSessoes = sessoesParaRemover.map(s => s.id);
+        ingressos = ingressos.filter(ingresso => !idsSessoes.includes(ingresso.sessaoId));
+        
+        // Atualizar localStorage
+        localStorage.setItem('filmes', JSON.stringify(filmes));
+        localStorage.setItem('sessoes', JSON.stringify(sessoes));
+        localStorage.setItem('ingressos', JSON.stringify(ingressos));
+        
+        // Atualizar filmes em cartaz
+        atualizarFilmesEmCartaz();
+        
+        // Recarregar a exibição
+        carregarFilmes();
+    }
+
+    // Função para atualizar filmes em cartaz
+    function atualizarFilmesEmCartaz() {
+        const filmes = JSON.parse(localStorage.getItem('filmes')) || [];
+        const sessoes = JSON.parse(localStorage.getItem('sessoes')) || [];
+        const ingressos = JSON.parse(localStorage.getItem('ingressos')) || [];
+        
+        const filmesAtualizados = filmes.map(filme => {
+            return {
+                ...filme,
+                sessoes: sessoes.filter(s => s.filmeId === filme.id),
+                ingressos: ingressos.filter(i => {
+                    const sessao = sessoes.find(s => s.id === i.sessaoId);
+                    return sessao && sessao.filmeId === filme.id;
+                })
+            };
+        });
+        
+        localStorage.setItem('filmesEmCartaz', JSON.stringify(filmesAtualizados));
+    }
+
+    // Inicialização
+    carregarFilmes();
+    
+    // Atualizar quando houver mudanças em outras abas
+    window.addEventListener('storage', function() {
+        carregarFilmes();
+    });
+});
+// Menu de Administração
+document.addEventListener('DOMContentLoaded', function() {
+    const menuBtn = document.getElementById('menuBtn');
+    const menuOptions = document.getElementById('menuOptions');
+
+    // Abrir/fechar menu
+    menuBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        menuOptions.classList.toggle('show');
+    });
+
+    // Fechar menu ao clicar fora
+    document.addEventListener('click', function(e) {
+        if (!menuOptions.contains(e.target) && e.target !== menuBtn) {
+            menuOptions.classList.remove('show');
+        }
+    });
+
+    // Fechar menu ao rolar
+    window.addEventListener('scroll', function() {
+        menuOptions.classList.remove('show');
+    });
+
+    // ... (mantenha o resto do seu código)
+});
     </script>
 </body>
 </html>
